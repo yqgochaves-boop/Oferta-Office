@@ -1,5 +1,5 @@
   :root {
-    --yellow: #EA580C;
+    --yellow: #F9965A;
     --dark: #171e19;
     --sage: #b7c6c2;
     --white: #ffffff;
@@ -106,15 +106,30 @@
     pointer-events: none;
   }
 
-  .hero-inner {
-    max-width: 1100px;
+  .hero-inner-center {
+    max-width: 700px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
     position: relative;
     z-index: 1;
+  }
+
+  .hero-text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .hero-text-center .hero-sub {
+    max-width: 520px;
+  }
+
+  .hero-text-center .hero-ctas {
+    justify-content: center;
   }
 
   .hero-badge {
@@ -148,6 +163,74 @@
     font-style: normal;
     -webkit-text-stroke: 2px #000;
     color: transparent;
+  }
+
+  /* ── HERO TITLE WORD ANIMATIONS ── */
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
+
+  .hw {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px) rotate(-2deg);
+    animation: wordPop 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+
+  .hw1 { animation-delay: 0.15s; }
+  .hw2 { animation-delay: 0.28s; }
+  .hw3 { animation-delay: 0.38s; }
+  .hw4 { animation-delay: 0.50s; }
+  .hw5 { animation-delay: 0.65s; }
+  .hw6 { animation-delay: 0.78s; }
+
+  @keyframes wordPop {
+    0%   { opacity: 0; transform: translateY(40px) rotate(-2deg); }
+    60%  { opacity: 1; transform: translateY(-6px) rotate(0.5deg); }
+    80%  { transform: translateY(3px) rotate(-0.3deg); }
+    100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+  }
+
+  /* Shimmer sweep on the outline "PowerPoint" word */
+  .hero-title em.hw4 {
+    position: relative;
+    -webkit-text-stroke: 2px #000;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+
+  .hero-title em.hw4::after {
+    content: 'PowerPoint';
+    position: absolute;
+    left: 0; top: 0;
+    -webkit-text-stroke: 0;
+    color: transparent;
+    background: linear-gradient(100deg, transparent 20%, rgba(0,0,0,0.12) 50%, transparent 80%);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: shimmer 2.5s ease-in-out 1.2s infinite;
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: 200% center; }
+    100% { background-position: -200% center; }
+  }
+
+  .hero-headline {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    color: #000;
   }
 
   .hero-sub {
@@ -879,7 +962,6 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 30px; }
     .browser-mockup { display: none; }
     .pain-grid { grid-template-columns: 1fr; }
     .features-grid { grid-template-columns: 1fr 1fr; }
@@ -1190,6 +1272,101 @@
     .photo-showcase { padding: 40px 20px; }
     .photo-stack { flex-direction: column; gap: 12px; }
   }
+
+  /* ── OFFICE ILLUSTRATION ── */
+  .office-illustration {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    height: 380px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .oicon {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.35));
+    transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275), filter 0.3s ease;
+    cursor: default;
+  }
+
+  .oicon:hover { filter: drop-shadow(8px 8px 0px rgba(0,0,0,0.5)); z-index: 10; }
+  .oicon svg { border-radius: 14px; }
+
+  .oicon-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 100px;
+    padding: 3px 12px;
+    box-shadow: 2px 2px 0 #000;
+    white-space: nowrap;
+  }
+
+  .oicon-word    { top: 20px;   left: 10px;  transform: rotate(-12deg); animation: iconFloat1 3.5s ease-in-out infinite; }
+  .oicon-ppt     { top: 20px;   right: 10px; transform: rotate(10deg);  animation: iconFloat2 4s   ease-in-out infinite; }
+  .oicon-excel   { bottom: 20px; left: 20px;  transform: rotate(-8deg);  animation: iconFloat3 3.8s ease-in-out infinite; }
+  .oicon-outlook { bottom: 20px; right: 10px; transform: rotate(14deg);  animation: iconFloat4 4.2s ease-in-out infinite; }
+
+  .oicon-word:hover    { transform: rotate(-12deg) scale(1.12) !important; }
+  .oicon-ppt:hover     { transform: rotate(10deg)  scale(1.12) !important; }
+  .oicon-excel:hover   { transform: rotate(-8deg)  scale(1.12) !important; }
+  .oicon-outlook:hover { transform: rotate(14deg)  scale(1.12) !important; }
+
+  .office-center-badge {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    filter: drop-shadow(0px 6px 18px rgba(0,0,0,0.2));
+    animation: centerPulse 3s ease-in-out infinite;
+  }
+
+  .office-center-text {
+    font-family: 'Syne', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: #D83B01;
+    letter-spacing: -0.02em;
+  }
+
+  @keyframes iconFloat1 { 0%,100%{transform:rotate(-12deg) translateY(0)} 50%{transform:rotate(-12deg) translateY(-8px)} }
+  @keyframes iconFloat2 { 0%,100%{transform:rotate(10deg) translateY(0)}  50%{transform:rotate(10deg) translateY(-10px)} }
+  @keyframes iconFloat3 { 0%,100%{transform:rotate(-8deg) translateY(0)}  50%{transform:rotate(-8deg) translateY(-7px)} }
+  @keyframes iconFloat4 { 0%,100%{transform:rotate(14deg) translateY(0)}  50%{transform:rotate(14deg) translateY(-9px)} }
+  @keyframes centerPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
+
+  @keyframes iconEntryTL { from{opacity:0;transform:rotate(-12deg) translate(-50px,-50px) scale(0.4)} to{opacity:1;transform:rotate(-12deg) translate(0,0) scale(1)} }
+  @keyframes iconEntryTR { from{opacity:0;transform:rotate(10deg) translate(50px,-50px) scale(0.4)}  to{opacity:1;transform:rotate(10deg) translate(0,0) scale(1)} }
+  @keyframes iconEntryBL { from{opacity:0;transform:rotate(-8deg) translate(-50px,50px) scale(0.4)}  to{opacity:1;transform:rotate(-8deg) translate(0,0) scale(1)} }
+  @keyframes iconEntryBR { from{opacity:0;transform:rotate(14deg) translate(50px,50px) scale(0.4)}   to{opacity:1;transform:rotate(14deg) translate(0,0) scale(1)} }
+  @keyframes centerEntry { from{opacity:0;transform:scale(0) rotate(-20deg)} to{opacity:1;transform:scale(1) rotate(0)} }
+
+  .office-illustration.visible .oicon-word    { animation: iconEntryTL 0.6s cubic-bezier(0.175,0.885,0.32,1.275) 0.2s  both, iconFloat1 3.5s 0.85s ease-in-out infinite; }
+  .office-illustration.visible .oicon-ppt     { animation: iconEntryTR 0.6s cubic-bezier(0.175,0.885,0.32,1.275) 0.35s both, iconFloat2 4s   1s    ease-in-out infinite; }
+  .office-illustration.visible .oicon-excel   { animation: iconEntryBL 0.6s cubic-bezier(0.175,0.885,0.32,1.275) 0.5s  both, iconFloat3 3.8s 1.15s ease-in-out infinite; }
+  .office-illustration.visible .oicon-outlook { animation: iconEntryBR 0.6s cubic-bezier(0.175,0.885,0.32,1.275) 0.65s both, iconFloat4 4.2s 1.3s  ease-in-out infinite; }
+  .office-illustration.visible .office-center-badge { animation: centerEntry 0.7s cubic-bezier(0.175,0.885,0.32,1.275) 0.1s both, centerPulse 3s 0.85s ease-in-out infinite; }
+
+  @media (max-width: 600px) {
+    .office-illustration { height: 300px; max-width: 340px; }
+    .oicon svg { width: 64px !important; height: 64px !important; }
+    .oicon-label { font-size: 0.7rem; }
+    .office-center-text { font-size: 1.1rem; }
+    .office-center-badge svg { width: 46px !important; height: 46px !important; }
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(30px); }
     to   { opacity: 1; transform: translateY(0); }
