@@ -30,3 +30,4 @@
     sEl.textContent = String(s).padStart(2, '0');
   }
   setInterval(tick, 1000);
+
