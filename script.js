@@ -1,5 +1,14 @@
   // FAQ accordion
-  document.querySelectorAll('.faq-item').forEach(item => {
+// Atualiza a data da urgency bar para hoje automaticamente
+const hoje = new Date();
+const dia = String(hoje.getDate()).padStart(2, '0');
+const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+const ano = hoje.getFullYear();
+document.querySelector('.urgency-bar span').textContent = 
+  `DESCONTO ATIVO APENAS HOJE — ${dia}/${mes}/${ano}`; 
+
+
+document.querySelectorAll('.faq-item').forEach(item => {
     item.querySelector('.faq-q').addEventListener('click', () => {
       const wasOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
